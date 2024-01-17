@@ -4,6 +4,7 @@ from aiogram.filters import Command
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from config import STUDY_GROUPS
 from database import User
 from keyboards import inline, fabrics
 
@@ -16,7 +17,7 @@ SETTINGS_MESSAGE: str = (
 )
 IN_DEVELOPMENT_MESSAGE: str = (
     "⚒ <b>Function in development</b> 🚧\n\n"
-    "...but we are already working on it! 🚀"
+    "However, rest assured that our team is actively working on it! 🚀"
 )
 SWITCH_GROUP_MESSAGE = (
     "🎓 <b>Switch group</b>\n\n"
@@ -24,7 +25,7 @@ SWITCH_GROUP_MESSAGE = (
 )
 SETTINGS_UPDATE_MESSAGE = (
     "🔄 <b>Settings updated</b>\n\n"
-    "{0}: {1} -> {2}"
+    "{0} from <i>{1}</i> to <i>{2}</i>"
 )
 
 
@@ -65,13 +66,13 @@ async def change_language_callback(call: CallbackQuery):
 async def switch_group_callback(call: CallbackQuery):
     await call.message.edit_text(
         SWITCH_GROUP_MESSAGE,
-        reply_markup=fabrics.get_switch_group_keyboard()
+        reply_markup=fabrics.get_switch_group_keyboard(STUDY_GROUPS)
     )
     await call.answer()
 
 
-@router.callback_query(fabrics.SettingsAction.filter(F.action == "switch_group"))
-async def group_switched_callback(call: CallbackQuery, callback_data: fabrics.SettingsAction, session: AsyncSession):
+@router.callback_query(fabrics.SettingsAction.filter(F.action == "update_group"))
+async def update_study_group_callback(call: CallbackQuery, callback_data: fabrics.SettingsAction, session: AsyncSession):
     user = await session.execute(select(User).where(User.user_id == call.from_user.id))
     user = user.scalar()
 
