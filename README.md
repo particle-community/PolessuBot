@@ -1,6 +1,8 @@
 # PolesSU Bot
 
-![PolesSU Bot Picture]()
+<p align="center">
+  <img src="bot_picture.jpg" alt="PolesSU Bot Icon" width="300" height="300">
+</p>
 
 **[PolesSU Bot](https://t.me/polessu_schedule_bot)** is a **telegram bot** for viewing the class schedule of Polessky State University.
 
