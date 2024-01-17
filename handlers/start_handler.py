@@ -8,7 +8,7 @@ router = Router()
 
 START_MESSAGE: str = (
         "<b>Welcome to <a href=\"https://t.me/polessu_schedule_bot\">PolesSU Bot</a> 👋</b>\n\n"
-        "Here you can get the current schedule of classes and sports facilities of PolesSU\n\n"
+        "Here you can view the class schedule of Polessky State University\n\n"
         "Join us: <a href=\"https://t.me/+tZ1rie_oLXljMjJi\">🔗 Particle Community</a>"
 )
 

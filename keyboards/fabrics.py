@@ -2,6 +2,8 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.filters.callback_data import CallbackData
 
+from config import STUDY_GROUPS
+
 
 class SinglePagination(CallbackData, prefix="spg"):
     action: str
@@ -12,6 +14,11 @@ class DoublePagination(CallbackData, prefix="dpg"):
     action: str
     page: int
     section: int
+
+
+class SettingsAction(CallbackData, prefix="sac"):
+    action: str
+    value: str
 
 
 def get_single_paginator(page: int = 1, value: str = None) -> InlineKeyboardMarkup:
@@ -69,4 +76,14 @@ def get_double_paginator(page: int = 1, section: int = 1,
     builder = InlineKeyboardBuilder()
     builder.row(*page_buttons)
     builder.row(*section_buttons)
+    return builder.as_markup()
+
+
+def get_switch_group_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    for group_name in STUDY_GROUPS:
+        builder.row(InlineKeyboardButton(
+            text=group_name,
+            callback_data=SettingsAction(action="switch_group", value=group_name).pack()
+        ))
     return builder.as_markup()

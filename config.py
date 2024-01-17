@@ -27,3 +27,6 @@ DATABASE_URL = f"mysql+aiomysql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_
 # SqlAlchemy initialize
 engine = create_async_engine(DATABASE_URL, echo=True)
 sessionmaker = async_sessionmaker(engine, expire_on_commit=False)
+
+# Supported study groups
+STUDY_GROUPS = ["23ИТ-1", "23ИТ-2", "23ИТ-3"]

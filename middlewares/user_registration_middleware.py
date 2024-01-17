@@ -4,6 +4,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message
 from sqlalchemy import select
 
+from config import STUDY_GROUPS
 from database import User
 
 
@@ -29,7 +30,7 @@ class UserRegistrationMiddleware(BaseMiddleware):
                 session.add(User(
                     user_id=user_id,
                     username=user_data.username,
-                    study_group="23ИТ-2",
+                    study_group=STUDY_GROUPS[0],
                     language_code=user_data.language_code
                 ))
                 await session.commit()

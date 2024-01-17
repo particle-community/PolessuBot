@@ -5,7 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import User
-from keyboards import inline
+from keyboards import inline, fabrics
 
 router = Router()
 
@@ -17,6 +17,14 @@ SETTINGS_MESSAGE: str = (
 IN_DEVELOPMENT_MESSAGE: str = (
     "⚒ <b>Function in development</b> 🚧\n\n"
     "...but we are already working on it! 🚀"
+)
+SWITCH_GROUP_MESSAGE = (
+    "🎓 <b>Switch group</b>\n\n"
+    "Select one of the available options"
+)
+SETTINGS_UPDATE_MESSAGE = (
+    "🔄 <b>Settings updated</b>\n\n"
+    "{0}: {1} -> {2}"
 )
 
 
@@ -56,7 +64,25 @@ async def change_language_callback(call: CallbackQuery):
 @router.callback_query(F.data == "switch_group")
 async def switch_group_callback(call: CallbackQuery):
     await call.message.edit_text(
-        IN_DEVELOPMENT_MESSAGE,
+        SWITCH_GROUP_MESSAGE,
+        reply_markup=fabrics.get_switch_group_keyboard()
+    )
+    await call.answer()
+
+
+@router.callback_query(fabrics.SettingsAction.filter(F.action == "switch_group"))
+async def group_switched_callback(call: CallbackQuery, callback_data: fabrics.SettingsAction, session: AsyncSession):
+    user = await session.execute(select(User).where(User.user_id == call.from_user.id))
+    user = user.scalar()
+
+    old_group = user.study_group
+    new_group = callback_data.value
+
+    user.study_group = new_group
+    await session.commit()
+
+    await call.message.edit_text(
+        SETTINGS_UPDATE_MESSAGE.format("The group switched", old_group, new_group),
         reply_markup=inline.settings_back
     )
     await call.answer()
