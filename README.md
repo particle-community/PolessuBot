@@ -1,8 +1,8 @@
-# PolesSU Bot
-
 <p align="center">
-  <img src="bot_picture.jpg" alt="PolesSU Bot Icon" width="300" height="300">
+  <img src="bot_picture.jpg" alt="PolesSU Bot Icon" width="250" height="250">
 </p>
+
+# PolesSU Bot
 
 **[PolesSU Bot](https://t.me/polessu_schedule_bot)** is a **telegram bot** for viewing the class schedule of Polessky State University.
 
@@ -25,4 +25,4 @@ Currently, a separate script is used for this purpose.
 
 ## License
 
-## Changelog
+This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
