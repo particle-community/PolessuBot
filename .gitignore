@@ -1,2 +1,33 @@
-/.env
-/.idea/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+*.venv/
+*.env/
+*.env
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Compiled Python files
+*.pyc
+
+# Package distribution / installation
+dist/
+build/
+*.egg-info/
+
+# Miscellaneous
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+*.swp

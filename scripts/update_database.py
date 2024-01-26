@@ -1,4 +1,9 @@
 import asyncio
+import os
+import sys
+
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from sqlalchemy import delete
 from config import sessionmaker
@@ -19,7 +24,7 @@ async def update_group_schedule(group: str):
 
 async def main():
     groups_and_teachers = PolessuDataScraper.get_groups_and_teachers()
-    groups = [group for group in groups_and_teachers if group.startswith('23ИТ')]
+    groups = [group for group in groups_and_teachers if group.startswith('23И')]
 
     for group in groups:
         await update_group_schedule(group)

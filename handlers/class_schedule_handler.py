@@ -1,5 +1,6 @@
 from contextlib import suppress
 from datetime import datetime, timedelta, date
+from shlex import join
 
 from aiogram import Router, F
 from aiogram.exceptions import TelegramBadRequest
@@ -95,8 +96,10 @@ async def get_formatted_day_schedule(date_time: datetime, study_group: str, sess
 
     classes = result.all()
 
-    message = f"🗓️ <b>WEEK {get_relative_week_num(START_DATE, date_time)}</b> \U0001F5D3\n\n" \
-              f"📌 <b>{date_time.strftime('%A')} ({date_time.strftime('%d.%m.%Y')})</b>\n\n"
+    message = (
+        f"🗓️ <b>WEEK {get_relative_week_num(START_DATE, date_time)} | " 
+        f"{date_time.strftime('%A')} ({date_time.strftime('%d.%m.%Y')})</b>\n\n"
+        )
 
     time_format: str = "%H:%M"
 
@@ -105,14 +108,21 @@ async def get_formatted_day_schedule(date_time: datetime, study_group: str, sess
             class_data.start_time.strftime(time_format),
             (class_data.start_time + timedelta(minutes=80)).strftime(time_format)
         )
-        message += "\n".join((
-            f"🕒 <i>{time_range}</i>",
-            f"📚 {class_data.subject_name}",
-            f"🚪 {class_data.room or '–'}",
-            f"👨‍🏫 {class_data.teacher or '–'}",
-            f"🔗 {class_data.subgroup or '–'}\n\n"
+
+        subject_info = "\n".join((
+            f"<b>{class_data.subject_name}</b>",
+            "-" * 60,
+            f"🕓 <i>{time_range}</i>\n",
         ))
 
+        if class_data.room:
+            subject_info += f"📍 <i>{class_data.room}</i>\n"
+        if class_data.teacher:
+            subject_info += f"👨‍🏫 <i>{class_data.teacher}</i>\n"
+        if class_data.subgroup:
+            subject_info += f"🔗 <i>{class_data.subgroup or '–'}</i>\n"
+
+        message += (subject_info + "\n")
     return message
 
 

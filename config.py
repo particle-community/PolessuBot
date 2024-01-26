@@ -14,11 +14,11 @@ WEBHOOK_PATH = f"/webhook"
 
 # Webserver settings
 WEB_SERVER_HOST = '::'
-WEB_SERVER_PORT = int(os.getenv('WEB_SERVER_PORT'))
+WEB_SERVER_PORT = int(os.getenv('WEB_SERVER_PORT', default=5555))
 
 # Database settings
 DATABASE_HOST = os.getenv("DATABASE_HOST")
-DATABASE_PORT = int(os.getenv("DATABASE_PORT"))
+DATABASE_PORT = int(os.getenv("DATABASE_PORT", default=5555))
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
 DATABASE_USER = os.getenv("DATABASE_USER")
 DATABASE_NAME = os.getenv("DATABASE_NAME")
@@ -29,4 +29,4 @@ engine = create_async_engine(DATABASE_URL, echo=True)
 sessionmaker = async_sessionmaker(engine, expire_on_commit=False)
 
 # Supported study groups
-STUDY_GROUPS = ["23ИТ-1", "23ИТ-2", "23ИТ-3"]
+STUDY_GROUPS = ["23ИТ-1", "23ИТ-2", "23ИТ-3", "23ИЭ-1"]
