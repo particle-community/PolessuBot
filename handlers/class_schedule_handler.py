@@ -1,6 +1,5 @@
 from contextlib import suppress
-from datetime import datetime, timedelta, date
-from shlex import join
+from datetime import datetime, timedelta
 
 from aiogram import Router, F
 from aiogram.exceptions import TelegramBadRequest
