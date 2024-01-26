@@ -23,7 +23,7 @@ MIN_WEEK: int = 1
 
 
 @router.message(F.text == "🗓️ Class schedule")
-@router.message(Command(commands=["class_schedule", "classes"]))
+@router.message(Command("classes"))
 async def class_schedule_command(message: Message, session: AsyncSession):
     current_date, day_num = get_nearest_date(datetime.now())
 
@@ -109,20 +109,19 @@ async def get_formatted_day_schedule(date_time: datetime, study_group: str, sess
             (class_data.start_time + timedelta(minutes=80)).strftime(time_format)
         )
 
-        subject_info = "\n".join((
+        class_message = "\n".join((
             f"<b>{class_data.subject_name}</b>",
-            "-" * 60,
-            f"🕓 <i>{time_range}</i>\n",
+            f"| 🕓 <code>{time_range}</code>\n",
         ))
 
         if class_data.room:
-            subject_info += f"📍 <i>{class_data.room}</i>\n"
+            class_message += f"| 📍 <code>{class_data.room}</code>\n"
         if class_data.teacher:
-            subject_info += f"👨‍🏫 <i>{class_data.teacher}</i>\n"
+            class_message += f"| 👨‍🏫 <code>{class_data.teacher}</code>\n"
         if class_data.subgroup:
-            subject_info += f"🔗 <i>{class_data.subgroup or '–'}</i>\n"
+            class_message += f"| 🔗 <code>{class_data.subgroup}</code>\n"
 
-        message += (subject_info + "\n")
+        message += (class_message + "\n")
     return message
 
 

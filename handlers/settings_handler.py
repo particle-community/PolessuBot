@@ -12,12 +12,12 @@ router = Router()
 
 SETTINGS_MESSAGE: str = (
     "⚙️ <b>Settings</b>\n\n"
-    "㊗️ Language: <i>{0}</i>\n"
-    "🎓 Study group: <i>{1}</i>"
+    "㊗️ Language: <code>{0}</code>\n"
+    "🎓 Study group: <code>{1}</code>"
 )
 IN_DEVELOPMENT_MESSAGE: str = (
-    "⚒ <b>Function in development</b> 🚧\n\n"
-    "However, rest assured that our team is actively working on it! 🚀"
+    "⚠️ <b>Function in development</b>\n\n"
+    "However, our team is actively working on this! 🚀"
 )
 SWITCH_GROUP_MESSAGE = (
     "🎓 <b>Switch group</b>\n\n"
@@ -25,7 +25,7 @@ SWITCH_GROUP_MESSAGE = (
 )
 SETTINGS_UPDATE_MESSAGE = (
     "🔄 <b>Settings updated</b>\n\n"
-    "{0} from <i>{1}</i> to <i>{2}</i>"
+    "{0} to <i>{1}</i>"
 )
 
 
@@ -76,14 +76,13 @@ async def update_study_group_callback(call: CallbackQuery, callback_data: fabric
     user = await session.execute(select(User).where(User.user_id == call.from_user.id))
     user = user.scalar()
 
-    old_group = user.study_group
     new_group = callback_data.value
 
     user.study_group = new_group
     await session.commit()
 
     await call.message.edit_text(
-        SETTINGS_UPDATE_MESSAGE.format("The group switched", old_group, new_group),
+        SETTINGS_UPDATE_MESSAGE.format("The group switched", new_group),
         reply_markup=inline.settings_back
     )
-    await call.answer()
+    await call.answer("🔄 Study group switched")
