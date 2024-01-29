@@ -62,12 +62,17 @@ class PolessuDataScraper:
                 teacher = row_cells[3].text
                 subgroup = row_cells[4].text
 
+                # [Hack start]
                 week_button_text = document.select(".btn-group .btn-primary")[1].text.split()[1]  # '1-20' or '21-24'
                 week_page = int(week_button_text[0]) - 1  # 0 or 1
 
+                term_button_text = document.select(".btn-group .btn-primary")[0].text[0] # 1 or 2
+                term_page = int(term_button_text) - 1 # 0 or 1
+                # [Hack end]
+
                 for week_number in week_numbers:
                     start_time = PolessuDataScraper.get_start_date() + timedelta(
-                        weeks=week_number + 20 * week_page,
+                        weeks=week_number + 20 * week_page + 23 * term_page,
                         days=day_number,
                         hours=int(start_time_string[0]),
                         minutes=int(start_time_string[1]),

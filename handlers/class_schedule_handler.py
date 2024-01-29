@@ -17,7 +17,7 @@ router = Router()
 START_DATE: datetime = datetime(2023, 9, 4)
 MAX_DAY: int = 5
 MIN_DAY: int = 0
-MAX_WEEK: int = 24
+MAX_WEEK: int = 41
 MIN_WEEK: int = 1
 
 
@@ -87,8 +87,8 @@ async def get_formatted_day_schedule(date_time: datetime, study_group: str, sess
         Class.teacher,
         Class.subgroup
         ).where(
-        (Class.start_time >= date_time.date()) &
-        (Class.start_time < date_time.date() + timedelta(days=1)) &
+        (Class.start_time.date() >= date_time.date()) &
+        (Class.start_time.date() < date_time.date() + timedelta(days=1)) &
         (Class.study_group == study_group)
     )
     result = await session.execute(sql_query)
