@@ -110,15 +110,15 @@ async def get_formatted_day_schedule(date_time: datetime, study_group: str, sess
 
         class_message = "\n".join((
             f"<b>{class_data.subject_name}</b>",
-            f"| 🕓 <code>{time_range}</code>\n",
+            f"🕓 <code>{time_range}</code>\n",
         ))
 
         if class_data.room:
-            class_message += f"| 📍 <code>{class_data.room}</code>\n"
+            class_message += f"📍 <code>{class_data.room}</code>\n"
         if class_data.teacher:
-            class_message += f"| 👨‍🏫 <code>{class_data.teacher}</code>\n"
+            class_message += f"👨‍🏫 <code>{class_data.teacher}</code>\n"
         if class_data.subgroup:
-            class_message += f"| 🔗 <code>{class_data.subgroup}</code>\n"
+            class_message += f"🔗 <code>{class_data.subgroup}</code>\n"
 
         message += (class_message + "\n")
     return message
