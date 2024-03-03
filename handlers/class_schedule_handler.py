@@ -105,7 +105,7 @@ async def get_formatted_day_schedule(date_time: datetime, study_group: str, sess
     for class_data in classes:
         time_range: str = "{} - {}".format(
             class_data.start_time.strftime(time_format),
-            (class_data.start_time + timedelta(minutes=80)).strftime(time_format)
+            (class_data.start_time + timedelta(minutes=85)).strftime(time_format)
         )
 
         class_message = "\n".join((
