@@ -1,5 +1,13 @@
+# ⚠️ Project Archived
+
+This Telegram bot is no longer maintained and may not function correctly.  
+A new version might be developed from scratch in the future.
+
+This repository is kept for reference purposes only.
+<br/><br/><br/><br/>
+
 <p align="center">
-  <img src="bot_picture.jpg" alt="PolesSU Bot Icon" width="250" height="250">
+  <img src="bot_picture.jpg" alt="PolesSU Bot Icon" width="224" height="224">
 </p>
 
 # PolesSU Bot
