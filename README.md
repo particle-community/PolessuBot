@@ -3,7 +3,7 @@ This project is no longer supported, and a new Telegram bot is currently being d
 
 # PolesSU Bot
 
-**[PolesSU Bot](https://t.me/polessu_schedule_bot)** is a **telegram bot** for viewing the class schedule of Polessky State University.
+**PolesSU Bot** is a **telegram bot** for viewing the class schedule of Polessky State University.
 
 ## Description
 
