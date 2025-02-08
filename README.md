@@ -1,14 +1,5 @@
-# ⚠️ Project Archived
-
-This Telegram bot is no longer maintained and may not function correctly.  
-A new version might be developed from scratch in the future.
-
-This repository is kept for reference purposes only.
-<br/><br/><br/><br/>
-
-<p align="center">
-  <img src="bot_picture.jpg" alt="PolesSU Bot Icon" width="224" height="224">
-</p>
+# ⚠️ Project status update
+This project is no longer supported, and a new Telegram bot is currently being developed, which will be hosted in a new repository upon completion.
 
 # PolesSU Bot
 
@@ -28,8 +19,6 @@ The **bot** consists of three components:
 The client-side utilizes the schedule from the database and provides it to users.
 The scraper allows fetching data from the university website, which is then saved in the database.
 Currently, a separate script is used for this purpose.
-
-*The actual structure of the project differs, but it will be refined over time.*
 
 ## License
 
